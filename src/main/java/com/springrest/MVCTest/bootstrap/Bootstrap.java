@@ -3,7 +3,9 @@ package com.springrest.MVCTest.bootstrap;
 import com.springrest.MVCTest.domain.Category;
 import com.springrest.MVCTest.repositories.CategoryRepository;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Bootstrap implements CommandLineRunner {
 
     private final CategoryRepository categoryRepository;
