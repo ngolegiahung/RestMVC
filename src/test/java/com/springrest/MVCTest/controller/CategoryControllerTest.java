@@ -1,8 +1,8 @@
 package com.springrest.MVCTest.controller;
 
 import com.springrest.MVCTest.api.v1.model.CategoryDTO;
+import com.springrest.MVCTest.controller.v1.CategoryController;
 import com.springrest.MVCTest.services.CategoryService;
-import jakarta.inject.Inject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -17,7 +17,6 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

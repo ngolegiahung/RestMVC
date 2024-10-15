@@ -1,10 +1,8 @@
-package com.springrest.MVCTest.controller;
+package com.springrest.MVCTest.controller.v1;
 
 import com.springrest.MVCTest.api.v1.model.CategoryDTO;
-import com.springrest.MVCTest.domain.Category;
 import com.springrest.MVCTest.services.CategoryService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
