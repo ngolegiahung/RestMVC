@@ -2,6 +2,7 @@ package com.springrest.MVCTest.services;
 
 import com.springrest.MVCTest.api.v1.mapper.CustomerMapper;
 import com.springrest.MVCTest.api.v1.model.CustomerDTO;
+import com.springrest.MVCTest.domain.Customer;
 import com.springrest.MVCTest.repositories.CustomerRepository;
 import org.springframework.stereotype.Service;
 
@@ -37,5 +38,18 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.findById(id)
                 .map(customerMapper::customerToCustomerDTO)
                 .orElseThrow(RuntimeException::new);
+    }
+
+    @Override
+    public CustomerDTO createNewCustomer(CustomerDTO customerDTO) {
+        Customer customer = customerMapper.customerDTOToCustomer(customerDTO);
+
+        Customer savedCustomer = customerRepository.save(customer);
+
+        CustomerDTO returnCustomerDTO = customerMapper.customerToCustomerDTO(savedCustomer);
+
+        returnCustomerDTO.setCustomerUrl("/api/v1/customer/" + savedCustomer.getId());
+
+        return returnCustomerDTO;
     }
 }
