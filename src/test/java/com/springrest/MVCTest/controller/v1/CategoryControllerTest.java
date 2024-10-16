@@ -1,7 +1,6 @@
-package com.springrest.MVCTest.controller;
+package com.springrest.MVCTest.controller.v1;
 
 import com.springrest.MVCTest.api.v1.model.CategoryDTO;
-import com.springrest.MVCTest.controller.v1.CategoryController;
 import com.springrest.MVCTest.services.CategoryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -58,7 +57,8 @@ class CategoryControllerTest {
 
         mockMvc.perform(get("/api/v1/categories/")
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(2)));
     }
 
     @Test
