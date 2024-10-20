@@ -1,10 +1,8 @@
 package com.springrest.MVCTest.controller.v1;
 
 import com.springrest.MVCTest.api.v1.model.CustomerDTO;
-import com.springrest.MVCTest.services.CategoryService;
 import com.springrest.MVCTest.services.CustomerService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -12,8 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/api/v1/customers")
+@RequestMapping(CustomerController.BASE_URL)
 public class CustomerController {
+
+    public static final String BASE_URL = "/api/v1/customers";
 
     private final CustomerService customerService;
 

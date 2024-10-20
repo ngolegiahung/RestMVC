@@ -2,6 +2,7 @@ package com.springrest.MVCTest.services;
 
 import com.springrest.MVCTest.api.v1.mapper.CustomerMapper;
 import com.springrest.MVCTest.api.v1.model.CustomerDTO;
+import com.springrest.MVCTest.controller.v1.CustomerController;
 import com.springrest.MVCTest.domain.Customer;
 import com.springrest.MVCTest.repositories.CustomerRepository;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class CustomerServiceImpl implements CustomerService {
                 .stream()
                 .map(customer -> {
                     CustomerDTO customerDTO = customerMapper.customerToCustomerDTO(customer);
-                    customerDTO.setCustomerUrl("/api/v1/customer/" + customer.getId());
+                    customerDTO.setCustomerUrl(getCustomerUrl(customer.getId()));
                     return customerDTO;
                 })
                 .collect(Collectors.toList());
@@ -38,7 +39,7 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.findById(id)
                 .map(customerMapper::customerToCustomerDTO)
                 .map(customerDTO -> {
-                    customerDTO.setCustomerUrl("api/v1/customer/" + id);
+                    customerDTO.setCustomerUrl(getCustomerUrl(id));
                     return customerDTO;
                 })
                 .orElseThrow(RuntimeException::new);
@@ -64,7 +65,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         CustomerDTO returnCustomerDTO = customerMapper.customerToCustomerDTO(savedCustomer);
 
-        returnCustomerDTO.setCustomerUrl("/api/v1/customer/" + savedCustomer.getId());
+        returnCustomerDTO.setCustomerUrl(getCustomerUrl(savedCustomer.getId()));
 
         return returnCustomerDTO;
     }
@@ -83,7 +84,7 @@ public class CustomerServiceImpl implements CustomerService {
 
             CustomerDTO returnDto = customerMapper.customerToCustomerDTO(customerRepository.save(customer));
 
-            returnDto.setCustomerUrl("/api/v1/customer/" + id);
+            returnDto.setCustomerUrl(getCustomerUrl(id));
 
             return returnDto;
         }).orElseThrow(RuntimeException::new);
@@ -93,4 +94,9 @@ public class CustomerServiceImpl implements CustomerService {
     public void deleteCustomerById(Long id) {
         customerRepository.deleteById(id);
     }
+
+    private String getCustomerUrl(Long id) {
+        return CustomerController.BASE_URL + "/" + id;
+    }
+
 }
