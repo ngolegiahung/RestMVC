@@ -4,6 +4,8 @@ import com.springrest.MVCTest.api.v1.mapper.CustomerMapper;
 import com.springrest.MVCTest.api.v1.model.CustomerDTO;
 import com.springrest.MVCTest.controller.v1.CustomerController;
 import com.springrest.MVCTest.domain.Customer;
+import com.springrest.MVCTest.exception.ResourceNotFoundException;
+import com.springrest.MVCTest.exception.RestResponseEntityExceptionHandler;
 import com.springrest.MVCTest.repositories.CustomerRepository;
 import org.springframework.stereotype.Service;
 
@@ -42,7 +44,7 @@ public class CustomerServiceImpl implements CustomerService {
                     customerDTO.setCustomerUrl(getCustomerUrl(id));
                     return customerDTO;
                 })
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(ResourceNotFoundException::new);
     }
 
     @Override
@@ -87,7 +89,7 @@ public class CustomerServiceImpl implements CustomerService {
             returnDto.setCustomerUrl(getCustomerUrl(id));
 
             return returnDto;
-        }).orElseThrow(RuntimeException::new);
+        }).orElseThrow(ResourceNotFoundException::new);
     }
 
     @Override
